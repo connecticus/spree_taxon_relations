@@ -1,0 +1,50 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:taxon_relations) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <li id="new_product_link">
+    <%= button_link_to Spree.t(:new_taxon_relation), new_admin_taxon_relation_url, { :remote => true, :icon => 'icon-plus', :id => 'admin_new_product' } %>
+  </li>
+<% end %>
+
+<div id="new_product_wrapper" data-hook></div>
+
+
+
+<% if @taxon_relations.any? %>
+  <table class="index" id="listing_products">
+    <colgroup>
+       <col style="width: 40%;">
+       <col style="width: 40%;">
+       <col style="width: 20%;">
+    </colgroup>
+    <thead>
+      <tr data-hook="admin_products_index_headers">
+        <th ><%= Spree::TaxonRelation.human_attribute_name(:taxon)%></th>
+        <th><%= Spree::TaxonRelation.human_attribute_name(:related_taxon)%></th>
+        <th data-hook="admin_products_index_header_actions" class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @taxon_relations.each do |relation| %>
+          <tr id="<%= spree_dom_id relation %>" data-hook="admin_products_index_rows" class="<%= cycle('odd', 'even') %>">
+
+
+            <td><%= relation.taxon.pretty_name %></td>
+            <td class="align-center"><%= relation.related_taxon.pretty_name%></td>
+            <td class="actions" data-hook="admin_products_index_row_actions">
+              <%= link_to '', admin_taxon_relation_path(relation),:method=>:delete,:remote=>true, :class=>'delete-resource icon_link with-tip icon-trash no-text',:no_text => true,:confirm=>'Вы действительно хотите удалить?' %>
+              <%= link_to '', attach_admin_taxon_relation_url(relation), :"data-action" => "link", :class => "icon_link with-tip icon-link no-text", :title => Spree.t(:attach_products) %>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="no-objects-found">
+    <%= Spree.t(:no_results) %>
+  </div>
+<% end %>
+
+

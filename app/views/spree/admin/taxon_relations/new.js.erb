@@ -1,0 +1,80 @@
+$("#new_product_wrapper").html('<%= escape_javascript(render :template => "spree/admin/taxon_relations/new", :formats => [:html], :handlers => [:erb]) %>');
+<% unless Rails.env.test? %>
+  $('.select2').select2();
+<% end %>
+$("#admin_new_product").parent().hide();
+if ($("#taxon_relation_related_taxon_id").length > 0) {
+  $("#taxon_relation_related_taxon_id").select2({
+    placeholder: 'Добавьте таксон, из которого переносим товары',
+    initSelection: function(element, callback) {
+      var url = Spree.url('/admin/taxons/search', {
+          ids: element.val()
+      });
+      return $.getJSON(url, null, function(data) {
+        return callback(data['taxons']);
+      })
+    },
+    ajax: {
+      url: '/admin/taxons/search',
+      datatype: 'json',
+      data: function (term, page) {
+          return {
+            per_page: 50,
+            page: page,
+            q: term
+          };
+      },
+      results: function (data, page) {
+          var more = page < data.pages;
+          return {
+            results: data['taxons'],
+            more: more
+          };
+      }
+    },
+    formatResult: function(taxon) {
+      return taxon.pretty_name;
+    },
+    formatSelection: function(taxon) {
+      return taxon.pretty_name;
+    }
+  })
+}
+if ($("#taxon_relation_taxon_id").length > 0) {
+  $("#taxon_relation_taxon_id").select2({
+    placeholder: 'Добавьте таксон, в который переносим товары',
+    initSelection: function(element, callback) {
+      var url = Spree.url('/admin/taxons/search', {
+          ids: element.val()
+      });
+      return $.getJSON(url, null, function(data) {
+        return callback(data['taxons']);
+      })
+    },
+    ajax: {
+      url: '/admin/taxons/search',
+      datatype: 'json',
+      data: function (term, page) {
+          return {
+            per_page: 50,
+            page: page,
+            q: term
+          };
+      },
+      results: function (data, page) {
+          var more = page < data.pages;
+          return {
+            results: data['taxons'],
+            more: more
+          };
+      }
+    },
+    formatResult: function(taxon) {
+      return taxon.pretty_name;
+    },
+    formatSelection: function(taxon) {
+      return taxon.pretty_name;
+    }
+  })
+}
+$('.select2-container').css({width: '30em'})

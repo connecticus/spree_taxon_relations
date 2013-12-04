@@ -1,0 +1,18 @@
+ru:
+  activerecord:
+    models:
+      spree/taxon_relation:
+        one: "Связь таксонов"
+    attributes:
+      spree/taxon_relation:
+        taxon: "Основной таксон"
+        related_taxon: "Сопоставимый таксон"
+  spree:
+    taxon_relations: "Связи таксонов"
+    new_taxon_relation: "Новая связь"
+    back_to_taxon_relations_list: "Назад к списку связей"
+    attach_products: "Привязать продукты"
+    attaching_products_started: "Привязка продуктов запущена"
+    admin:
+      tab:
+        taxon_relations: "Связи таксонов"

@@ -1,0 +1,21 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:relation) %> &ldquo;<%= @relation.taxon.name%>-<%=@relation.related_taxon.name %>&rdquo;
+<% end %>
+
+<% content_for :sidebar_title do %>
+  <span id='relation-title' class="sku"><%= @relation.taxon.name%>-<%=@relation.related_taxon.name %></span>
+<% end %>
+
+<% content_for :sidebar do %>
+  <nav class="menu">
+    <ul data-hook="admin_product_tabs">
+      <li<%== ' class="active"' if current == 'Relation Details' %>>
+        <%= link_to_with_icon 'icon-edit', Spree.t(:relation_details), edit_admin_relation_path(@relation) %>
+      </li>
+      <li<%== ' class="active"' if current == 'Relation Properties' %>>
+        <%= link_to_with_icon 'icon-tasks', Spree.t(:properties), admin_relation_relation_properties_path(@relation) %>
+      </li>
+    </ul>
+  </nav>
+
+<% end %>
