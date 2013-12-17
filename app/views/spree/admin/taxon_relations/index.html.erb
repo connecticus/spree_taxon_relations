@@ -31,7 +31,7 @@
           <tr id="<%= spree_dom_id relation %>" data-hook="admin_products_index_rows" class="<%= cycle('odd', 'even') %>">
 
 
-            <td><%= relation.taxon.pretty_name %></td>
+            <td><%= relation.taxon.try(:pretty_name) %></td>
             <td class="align-center"><%= relation.related_taxon.try(:pretty_name) %></td>
             <td class="actions" data-hook="admin_products_index_row_actions">
               <%= link_to '', admin_taxon_relation_path(relation),:method=>:delete,:remote=>true, :class=>'delete-resource icon_link with-tip icon-trash no-text',:no_text => true,:confirm=>'Вы действительно хотите удалить?' %>
