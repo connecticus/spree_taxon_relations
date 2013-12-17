@@ -32,7 +32,7 @@
 
 
             <td><%= relation.taxon.pretty_name %></td>
-            <td class="align-center"><%= relation.related_taxon.pretty_name%></td>
+            <td class="align-center"><%= relation.related_taxon.try(:pretty_name) %></td>
             <td class="actions" data-hook="admin_products_index_row_actions">
               <%= link_to '', admin_taxon_relation_path(relation),:method=>:delete,:remote=>true, :class=>'delete-resource icon_link with-tip icon-trash no-text',:no_text => true,:confirm=>'Вы действительно хотите удалить?' %>
               <%= link_to '', attach_admin_taxon_relation_url(relation), :"data-action" => "link", :class => "icon_link with-tip icon-link no-text", :title => Spree.t(:attach_products) %>
