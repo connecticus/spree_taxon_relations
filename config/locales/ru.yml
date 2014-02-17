@@ -7,6 +7,7 @@ ru:
       spree/taxon_relation:
         taxon: "Основной таксон"
         related_taxon: "Сопоставимый таксон"
+        created_at: "Дата создания"
   spree:
     taxon_relations: "Связи таксонов"
     new_taxon_relation: "Новая связь"

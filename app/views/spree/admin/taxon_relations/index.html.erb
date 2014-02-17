@@ -11,18 +11,21 @@
 <div id="new_product_wrapper" data-hook></div>
 
 
+<%= paginate @taxon_relations %>
 
 <% if @taxon_relations.any? %>
   <table class="index" id="listing_products">
     <colgroup>
-       <col style="width: 40%;">
-       <col style="width: 40%;">
+       <col style="width: 35%;">
+       <col style="width: 35%;">
        <col style="width: 20%;">
+       <col style="width: 10%;">
     </colgroup>
     <thead>
       <tr data-hook="admin_products_index_headers">
         <th ><%= Spree::TaxonRelation.human_attribute_name(:taxon)%></th>
         <th><%= Spree::TaxonRelation.human_attribute_name(:related_taxon)%></th>
+        <th><%= Spree::TaxonRelation.human_attribute_name(:created_at)%></th>
         <th data-hook="admin_products_index_header_actions" class="actions"></th>
       </tr>
     </thead>
@@ -33,6 +36,7 @@
 
             <td><%= relation.taxon.try(:pretty_name) %></td>
             <td class="align-center"><%= relation.related_taxon.try(:pretty_name) %></td>
+            <td class='align-center'><%= relation.created_at.strftime('%e %B %Y %R') %></td>
             <td class="actions" data-hook="admin_products_index_row_actions">
               <%= link_to '', admin_taxon_relation_path(relation),:method=>:delete,:remote=>true, :class=>'delete-resource icon_link with-tip icon-trash no-text',:no_text => true,:confirm=>'Вы действительно хотите удалить?' %>
               <%= link_to '', attach_admin_taxon_relation_url(relation), :"data-action" => "link", :class => "icon_link with-tip icon-link no-text", :title => Spree.t(:attach_products) %>
@@ -46,5 +50,6 @@
     <%= Spree.t(:no_results) %>
   </div>
 <% end %>
+<%= paginate @taxon_relations %>
 
 
