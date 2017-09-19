@@ -1,11 +1,15 @@
 <%= form_for @taxon_relation,url:admin_taxon_relations_path,:method=>:post do |f| %>
   <fieldset >
-    <legend align="center"><%= Spree.t(:new_taxon_relation) %></legend>
+    <legend><%= Spree.t(:new_taxon_relation) %></legend>
 
     <%= render :partial => 'form', :locals => { :f => f } %>
 
     <div class="form-buttons filter-actions actions" data-hook="buttons">
       <%= button Spree.t('actions.create'), 'icon-ok' %>
     </div>
+
+    <br>
+
   </fieldset>
+    <br> <br> <br>
 <% end %>

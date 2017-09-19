@@ -1,15 +1,17 @@
 <div data-hook="new_product_attrs" class="row">
-  <div class="omega eight columns">
+  <div class="col-md-6">
     <%= f.field_container :taxon_id do %>
       <%= f.label :taxon_id, Spree::TaxonRelation.human_attribute_name(:taxon) %>
       <br>
       <%= f.hidden_field :taxon_id %>
     <% end %>
   </div>
-  <div class="omega eight columns">
+  <div class="col-md-6">
     <%= f.field_container :related_taxon_id do %>
       <%= f.label :related_taxon_id, Spree::TaxonRelation.human_attribute_name(:related_taxon) %><br />
       <%= f.hidden_field :related_taxon_id, :size => 16%>
     </div>
   <% end %>
 </div>
+
+
